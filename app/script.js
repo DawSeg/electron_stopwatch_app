@@ -25,7 +25,8 @@ const App = () => {
       setTime(prevTime => {
         if (prevTime <= 0) {
           clearInterval(timer);
-          return 0;
+          setStatus(prevStatus => (prevStatus === 'work' ? 'rest' : 'work'));
+          return prevStatus === 'work' ? 20 : 1200;
         } else {
           return prevTime - 1;
         }
