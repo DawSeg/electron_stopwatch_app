@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { render } from 'react-dom';
 
 const App = () => {
@@ -25,14 +25,25 @@ const App = () => {
       setTime(prevTime => {
         if (prevTime <= 0) {
           clearInterval(timer);
-          setStatus(prevStatus => (prevStatus === 'work' ? 'rest' : 'work'));
-          return prevStatus === 'work' ? 20 : 1200;
+          return 0;
         } else {
           return prevTime - 1;
         }
       });
     }, 1000));
   };
+
+  useEffect(() => {
+    if (time === 0) {
+      if (status === 'work') {
+        setStatus('rest');
+        setTime(20);
+      } else {
+        setStatus('work');
+        setTime(1200);
+      }
+    }
+  }, [time]);
 
   return (
     <div>
