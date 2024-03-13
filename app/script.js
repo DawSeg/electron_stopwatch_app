@@ -38,9 +38,11 @@ const App = () => {
       if (status === 'work') {
         setStatus('rest');
         setTime(20);
+        playBell();
       } else {
         setStatus('work');
         setTime(1200);
+        playBell();
       }
     }
   }, [time]);
@@ -54,7 +56,12 @@ const App = () => {
 
   const closeApp = () => {
     window.close()
-  }
+  };
+
+  const playBell = () => {
+    const bell = new Audio('./sounds/bell.wav');
+    bell.play();
+  };
 
   return (
     <div>
