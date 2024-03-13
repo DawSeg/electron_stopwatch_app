@@ -45,6 +45,12 @@ const App = () => {
     }
   }, [time]);
 
+  const stopTimer = () => {
+    clearInterval(timer);
+    setStatus('off');
+    setTime(0);
+  }
+
   return (
     <div>
       <h1>Protect your eyes</h1>
@@ -68,8 +74,8 @@ const App = () => {
       {status === 'off' && (
         <button onClick={startTimer} className="btn">Start</button>
       )}
-      {status === 'work' && (
-        <button className="btn">Stop</button>
+      {status !== 'off' && (
+        <button onClick={stopTimer} className="btn">Stop</button>
       )}
       <button className="btn btn-close">X</button>
     </div>
